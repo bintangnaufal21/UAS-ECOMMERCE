@@ -1,0 +1,217 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6; /* Abu muda untuk background */
+    color: #374151; /* Abu gelap untuk teks */
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    background-color: #3b82f6; /* Biru tua untuk tombol */
+    color: white;
+    font-size: 0.875rem;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #1d4ed8; /* Biru lebih gelap saat hover */
+}
+
+input, textarea, select {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db; /* Batas abu muda */
+    border-radius: 6px;
+    font-size: 0.875rem;
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    width: auto; /* Checkbox tidak full width */
+    margin: 0;
+}
+
+/* Main Content */
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Ruang antar section */
+}
+
+/* Section Container Umum (untuk Best Selling dan Banner) */
+.section-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb; /* Batas abu muda */
+}
+
+.section-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.section-header p {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Tabel Best Selling Books */
+.books-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.books-table th, .books-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.books-table th {
+    background-color: #f9fafb; /* Abu sangat muda */
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+}
+
+.books-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.book-image {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Form Banner Promo */
+.banner-form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Ruang antar form group */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+/* Preview Banner */
+.preview-section {
+    margin-top: 1rem;
+}
+
+.preview-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.banner-preview {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tombol Simpan Perubahan */
+.save-section {
+    text-align: center;
+    padding: 1rem;
+}
+
+.save-btn {
+    background-color: #10b981; /* Hijau untuk simpan */
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.save-btn:hover {
+    background-color: #059669;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    aside {
+        transform: translateX(-100%);
+        /* Note: Without JS, sidebar is hidden on smaller screens. In production, add JS for toggle. */
+    }
+
+    .main-container {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .section-header, .banner-form {
+        padding: 1rem;
+    }
+
+    .books-table th, .books-table td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .book-image {
+        width: 60px;
+        height: 90px;
+    }
+
+    .banner-preview {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .form-group {
+        gap: 0.5rem;
+    }
+
+    .books-table {
+        font-size: 0.75rem;
+    }
+}

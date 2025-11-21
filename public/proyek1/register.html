@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Bookstore</title>
+  <link rel="stylesheet" href="/proyek1/css/style.css">
+</head>
+<body>
+  <section class="auth-section">
+    <div class="auth-container">
+      <h2>Register</h2>
+      <form>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Buat username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Masukkan email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Buat password" required>
+        </div>
+
+        <button type="button" class="auth-btn" onclick="register()">Register</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Sudah punya akun? <a href="login.html">Login di sini</a></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function register() {
+      alert("Registrasi berhasil! Silakan login.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

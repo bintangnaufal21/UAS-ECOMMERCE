@@ -1,0 +1,300 @@
+/* ========================================
+   ORDERS MANAGEMENT CONTENT STYLES
+   ======================================== */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f3f4f6;
+  color: #374151;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Main Content */
+main {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Orders Table Section */
+.table-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.table-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #f9fafb;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+}
+
+tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-shipped {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-completed {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  background-color: #3b82f6;
+}
+
+.action-btn.view {
+  background-color: #10b981;
+}
+
+/* Order Detail Section */
+.detail-container {
+  display: none;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.detail-container.active {
+  display: block;
+}
+
+.detail-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.detail-section p {
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+/* Books List in Detail */
+.books-list {
+  margin-bottom: 1.5rem;
+}
+
+.books-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.books-list th, .books-list td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.books-list th {
+  background-color: #f9fafb;
+  font-weight: 600;
+}
+
+.total-row {
+  font-weight: bold;
+  color: #111827;
+}
+
+/* Status Update */
+.status-update {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.status-update label {
+  font-weight: 600;
+  color: #111827;
+}
+
+select {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+/* Notification */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #10b981;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.notification[style*="opacity: 1"] {
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+
+  th, td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .detail-container {
+    padding: 1rem;
+  }
+
+  .notification {
+    right: 10px;
+    left: 10px;
+    top: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  main {
+    padding: 1rem;
+  }
+
+  th, td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  select, button {
+    width: 100%;
+  }
+}
+
+/* Body scroll normal saat detail tinggi */
+body.modal-open {
+  overflow-y: auto;
+}

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="/admin1/css/head.css"> <!-- CSS gabungan (head + users, tanpa hamburger) -->
+    <link rel="stylesheet" href="/admin1/css/users.css"> <!-- CSS khusus users -->
+</head>
+
+<body>
+    <!-- Sidebar (selalu visible, tanpa toggle) -->
+    <aside id="sidebar">
+        <div class="header">
+            <h1>Admin Panel</h1>
+        </div>
+        <nav>
+            <a href="/admin1/html/login2.html">
+                <span>📊</span>
+                Dashboard
+            </a>
+            <a href="/admin1/html/bookm.html">
+                <span>📚</span>
+                Books
+            </a>
+            <a href="/admin1/html/orders.html">
+                <span>📦</span>
+                Orders
+            </a>
+            <a href="/admin1/html/homepage.html">
+                <span>🏠</span>
+                Homepage
+            </a>
+            <a href="/admin1/html/users.html">
+                <span>👥</span>
+                Users
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Container (selalu offset sidebar, tanpa overlay) -->
+    <div class="main-container" id="main-container">
+        <!-- Navbar (tanpa hamburger button) -->
+        <header class="navbar">
+            <div class="navbar-content">
+                <h1>User Management</h1>
+                <div class="user-info">
+                    <span>Welcome, Admin User</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Tabel Daftar Pelanggan -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>Daftar Pelanggan</h2>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID Pelanggan</th>
+                                <th>Nama Lengkap</th>
+                                <th>Email</th>
+                                <th>Nomor Telepon</th>
+                                <th>Jumlah Pesanan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody">
+                            <!-- Data akan dirender via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Riwayat Pesanan (awalnya hidden, muncul via JS) -->
+            <div class="detail-container" id="history-container">
+                <h2 class="detail-header" id="history-header">Pilih pelanggan untuk melihat riwayat pesanannya.</h2>
+
+                <div class="detail-section" id="history-section" style="display: none;">
+                    <h3>Pesanan</h3>
+                    <div class="orders-history">
+                        <table id="history-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Pesanan</th>
+                                    <th>Tanggal Pesanan</th>
+                                    <th>Daftar Buku</th>
+                                    <th>Total Harga</th>
+                                    <th>Status Pesanan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody">
+                                <!-- Dirender via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Tambah Admin Baru (fungsi via JS) -->
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Tambah Admin Baru</h2>
+                </div>
+                <form class="admin-form" id="admin-form">
+                    <div class="form-group">
+                        <label for="admin-name">Nama Lengkap</label>
+                        <input type="text" id="admin-name" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-email">Email</label>
+                        <input type="email" id="admin-email" placeholder="Masukkan email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Password</label>
+                        <input type="password" id="admin-password" placeholder="Masukkan password" required>
+                    </div>
+                    <button type="submit">Simpan</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const logoutBtn = document.querySelector(".logout-btn");
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", () => {
+                    // Hapus semua data login dari localStorage
+                    localStorage.removeItem("loggedInUser");
+                    localStorage.removeItem("isAdmin");
+
+                    // Notifikasi
+                    alert("Anda telah logout.");
+
+                    // Arahkan kembali ke halaman login
+                    window.location.href = "/proyek1/login.html";
+                });
+            }
+        });
+    </script>
+
+    <!-- JS untuk Interaktivitas (inline, simulasi data + sinkron localStorage, tanpa hamburger toggle) -->
+    <script>
+        // Load orders dari localStorage (sinkron dengan orders.html), default dummy jika kosong
+        let orders = JSON.parse(localStorage.getItem('ordersData')) || [
+            { id: '#1001', name: 'John Doe', date: '2023-10-01', total: 45.99, status: 'pending', details: { books: [{ title: 'The Great Gatsby', qty: 1 }, { title: 'To Kill a Mockingbird', qty: 2 }] } },
+            { id: '#1002', name: 'Jane Smith', date: '2023-10-02', total: 32.50, status: 'shipped', details: { books: [{ title: 'Sapiens', qty: 1 }] } },
+            { id: '#1003', name: 'Bob Johnson', date: '2023-10-03', total: 67.20, status: 'completed', details: { books: [{ title: 'The Da Vinci Code', qty: 3 }] } },
+            { id: '#1004', name: 'Alice Brown', date: '2023-10-04', total: 19.99, status: 'pending', details: { books: [{ title: '1984', qty: 1 }] } },
+            { id: '#1005', name: 'Charlie Wilson', date: '2023-10-05', total: 55.00, status: 'cancelled', details: { books: [{ title: 'Pride and Prejudice', qty: 2 }] } }
+        ];
+
+        // Data pelanggan dummy (nama match orders untuk sinkron)
+        let users = [
+            { id: '#C001', name: 'John Doe', email: 'john.doe@email.com', phone: '+1 (555) 123-4567', orderCount: 2 },
+            { id: '#C002', name: 'Jane Smith', email: 'jane.smith@email.com', phone: '+1 (555) 987-6543', orderCount: 1 },
+            { id: '#C003', name: 'Bob Johnson', email: 'bob.johnson@email.com', phone: 'N/A', orderCount: 3 },
+            { id: '#C004', name: 'Alice Brown', email: 'alice.brown@email.com', phone: '+1 (555) 456-7890', orderCount: 1 },
+            { id: '#C005', name: 'Charlie Wilson', email: 'charlie.wilson@email.com', phone: '+1 (555) 321-0987', orderCount: 2 }
+        ];
+        let selectedUserId = null;
+
+        // Hitung jumlah pesanan per user (sinkron dengan orders)
+        function calculateOrderCount(name) {
+            return orders.filter(order => order.name === name).length;
+        }
+
+        // Update orderCount di users array
+        function updateUserOrderCounts() {
+            users.forEach(user => {
+                user.orderCount = calculateOrderCount(user.name);
+            });
+        }
+
+        // Render tabel daftar pelanggan
+        function renderUsersTable() {
+            updateUserOrderCounts(); // Sinkron count
+            const tbody = document.getElementById('users-tbody');
+            tbody.innerHTML = '';
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.phone}</td>
+                    <td>${user.orderCount}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn view" onclick="viewHistory('${user.id}')">Lihat Riwayat</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Lihat riwayat pesanan user
+        function viewHistory(id) {
+            const user = users.find(u => u.id === id);
+            if (user) {
+                selectedUserId = id;
+                document.getElementById('history-header').textContent = `Riwayat Pesanan - ${user.name} (${user.id})`;
+
+                // Filter orders berdasarkan nama user (sinkron)
+                const userOrders = orders.filter(order => order.name === user.name);
+                const historyTbody = document.getElementById('history-tbody');
+                historyTbody.innerHTML = '';
+                userOrders.forEach(order => {
+                    const statusClass = `status-${order.status}`;
+                    const statusText = { pending: 'Pending', shipped: 'Dikirim', completed: 'Selesai', cancelled: 'Dibatalkan' }[order.status];
+                    const booksList = order.details.books.map(b => `${b.title} (${b.qty})`).join(', ');
+                    const historyRow = document.createElement('tr');
+                    historyRow.innerHTML = `
+                        <td>${order.id}</td>
+                        <td>${order.date}</td>
+                        <td>${booksList}</td>
+                        <td>$${order.total.toFixed(2)}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    `;
+                    historyTbody.appendChild(historyRow);
+                });
+
+                // Show sections
+                document.getElementById('history-container').classList.add('active');
+                document.getElementById('history-section').style.display = 'block';
+            }
+        }
+
+        // Hide riwayat (klik di luar, opsional UX)
+        document.getElementById('history-container').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('history-container')) {
+                hideHistory();
+            }
+        });
+
+        function hideHistory() {
+            document.getElementById('history-container').classList.remove('active');
+            document.getElementById('history-header').textContent = 'Pilih pelanggan untuk melihat riwayat pesanannya.';
+            document.getElementById('history-section').style.display = 'none';
+            selectedUserId = null;
+        }
+
+        // Form tambah admin (simulasi tambah ke users)
+        document.getElementById('admin-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('admin-name').value;
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value; // Tidak disimpan, simulasi
+            if (name && email) {
+                const newUser = {
+                    id: `#C${(users.length + 1).toString().padStart(3, '0')}`,
+                    name,
+                    email,
+                    phone: 'N/A', // Default
+                    orderCount: 0
+                };
+                users.push(newUser);
+                renderUsersTable();
+                document.getElementById('admin-form').reset();
+                showNotification('✅ Admin baru berhasil ditambahkan.');
+            }
+        });
+
+        // Show notifikasi (sama seperti orders)
+        function showNotification(message) {
+            let notif = document.getElementById('notification');
+            if (!notif) {
+                notif = document.createElement('div');
+                notif.id = 'notification';
+                notif.className = 'notification';
+                document.body.appendChild(notif);
+            }
+            notif.textContent = message;
+            notif.style.opacity = '1';
+            setTimeout(() => {
+                notif.style.opacity = '0';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        // Simpan orders ke localStorage saat load (untuk sinkron)
+        localStorage.setItem('ordersData', JSON.stringify(orders));
+
+        // Logout
+        document.querySelector('.logout-btn').addEventListener('click', () => {
+            if (confirm('Are you sure?')) window.location.href = "login.html";
+        });
+
+        // Init: Render tabel awal
+        renderUsersTable();
+    </script>
+</body>
+
+</html>

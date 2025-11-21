@@ -1,0 +1,213 @@
+/* ========================================
+   SIDEBAR STYLES (dari head.css, tanpa toggle/hamburger/overlay)
+   ======================================== */
+aside {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  overflow-y: auto;
+  /* HAPUS: Tidak ada transform translateX atau transition untuk toggle */
+}
+
+aside .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  background-color: #268f55; /* Accent color konsisten */
+  color: white;
+  padding: 0 1rem;
+}
+
+aside .header h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Navigasi di Sidebar */
+aside nav {
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+aside nav a {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #374151; /* Abu-abu gelap */
+  background-color: #f9fafb; /* Light background */
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease; /* Smooth untuk background, color, transform hover */
+}
+
+aside nav a:hover,
+aside nav a:focus,
+aside nav a.active { /* Highlight halaman aktif */
+  background-color: #268f55; /* Accent hover/active */
+  color: rgb(255, 255, 255);
+  transform: translateX(4px); /* Geser sedikit ke kanan */
+  outline: 2px solid #268f55; /* Focus ring untuk accessibility */
+  cursor: pointer;
+}
+
+aside nav span {
+  margin-right: 0.75rem;
+  font-size: 1.25rem; /* Icon size (emoji) */
+}
+
+
+/* ========================================
+   OVERLAY STYLES (Untuk Mobile Backdrop)
+   ======================================== */
+#sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 40; /* Di bawah sidebar */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  cursor: pointer; /* Klik overlay untuk close (visual saja tanpa JS) */
+}
+
+/* Saat sidebar open, tampilkan overlay */
+aside.open + #sidebar-overlay,
+.main-container.open #sidebar-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========================================
+   MAIN CONTAINER & NAVBAR STYLES
+   ======================================== */
+.main-container {
+  margin-left: 250px; /* Offset untuk sidebar fixed */
+  min-height: 100vh;
+  background-color: #f9fafb; /* Light background untuk admin */
+  transition: margin-left 0.3s ease; /* Smooth saat sidebar toggle */
+  position: relative; /* Biar overlay relatif */
+}
+
+.main-container .navbar {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+/* tulisan dashboard */
+.navbar-content h1 {
+  color: #268f55;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+/* User Info di Navbar */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info span {
+  color: #806b7f; /* ini tulisan welcome user */
+  font-size: 0.875rem;
+}
+
+.logout-btn {
+  background-color: #ef4444; /* Merah untuk logout */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover,
+.logout-btn:focus {
+  background-color: #dc2626; /* Merah lebih gelap */
+  outline: 2px solid #ef4444;
+}
+
+/* ========================================
+   RESPONSIVE (Mobile-First)
+   ======================================== */
+/* Di mobile: Sidebar hidden, main full-width, overlay untuk backdrop */
+@media (max-width: 768px) {
+  aside {
+    transform: translateX(-100%); /* Slide out default di mobile */
+  }
+
+  aside.open {
+    transform: translateX(0); /* Slide in saat class .open ditambahkan */
+  }
+
+  .main-container {
+    margin-left: 0; /* Full width di mobile */
+  }
+
+  .main-container.open {
+    margin-left: 250px; /* Offset saat sidebar open */
+  }
+
+  .navbar-content {
+    padding: 0 1rem;
+    flex-wrap: wrap;
+  }
+
+  .navbar-content h1 {
+    font-size: 1.25rem;
+  }
+
+  .user-info {
+    order: 3; /* Pindah user info ke bawah di mobile */
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+
+  .flex {
+    order: 2; /* Hamburger di tengah */
+  }
+}
+
+.items-center {
+  align-items: center;
+}
+
+/* Pastikan body tidak scroll saat sidebar open di mobile (opsional) */
+body.sidebar-open {
+  overflow: hidden;
+}

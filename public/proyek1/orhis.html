@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Booktopia</title>
+    <link rel="stylesheet" href="css/header.css"> <!-- Untuk top-banner, main-header, navbar konsisten -->
+    <link rel="stylesheet" href="css/style1.css"> <!-- CSS umum (termasuk modal login/register) -->
+    <link rel="stylesheet" href="css/orhis.css"> <!-- CSS khusus order history -->
+</head>
+<body>
+    <!-- Top Banner (konsisten) -->
+    <div class="top-banner">
+        <p>Free Shipping on all orders over $49. T&Cs apply. Ends Monday 13th October 2025.</p>
+    </div>
+
+    <!-- Header (konsisten, dengan trigger modal) -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>booktopia</h1>
+                <span>Australia’s home of books</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Title" />
+                <button>Search</button>
+            </div> 
+        </div>
+    </header>
+
+    <!-- Navigation Bar (konsisten) -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="categories.html">CATEGORIES</a></li>
+            <li><a href="orhis.html">ORDER HISTORY</a></li> <!-- Active page -->
+            <li><a href="cart.html">CART</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content Wrapper untuk spacing konsisten setelah navbar -->
+    <main class="content-wrapper">
+        <!-- Order History Container (wrapper rapi seperti checkout-container di co.html) -->
+        <div class="order-history-container">
+            <!-- Order History Header (seperti checkout-header) -->
+            <header class="oh-header">
+                <h1>Your Order History</h1>
+                <p>Track your past orders and their status.</p>
+            </header>
+
+            <!-- Order History Main (seperti checkout-main) -->
+            <main class="order-history-main">
+                <!-- Order List Section (seperti form-section, berisi daftar card) -->
+                <section class="order-list-section" id="order-list-section">
+                    <!-- Daftar order akan dirender dynamically oleh JS dari localStorage -->
+                    <!-- Jika kosong, tampilkan empty state -->
+                    <div class="empty-state" id="empty-state" style="display: none;">
+                        <h2>You haven’t placed any orders yet.</h2>
+                        <p>Start shopping to see your order history here.</p>
+                        <a href="home.html" class="shop-now-btn">Start Shopping</a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </main>
+</body>
+</html>

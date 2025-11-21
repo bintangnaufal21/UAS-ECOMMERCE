@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="/admin1/css/head.css">
+    <link rel="stylesheet" href="/admin1/css/homepage.css">
+
+</head>
+
+<body>
+    <!-- Sidebar (selalu visible, tanpa toggle) -->
+    <aside id="sidebar">
+        <div class="header">
+            <h1>Admin Panel</h1>
+        </div>
+        <nav>
+            <a href="/admin1/html/login2.html">
+                <span>📊</span>
+                Dashboard
+            </a>
+            <a href="/admin1/html/bookm.html" class="active">
+                <span>📚</span>
+                Books
+            </a>
+            <a href="/admin1/html/orders.html">
+                <span>📦</span>
+                Orders
+            </a>
+            <a href="/admin1/html/homepage.html">
+                <span>🏠</span>
+                Homepage
+            </a>
+            <a href="/admin1/html/users.html">
+                <span>👥</span>
+                Users
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Overlay for mobile sidebar (static without JS) -->
+    <div id="sidebar-overlay"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar-content">
+                <h1>Homepage</h1>
+                <div class="user-info">
+                    <span>Welcome, Admin User</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Bagian Best Selling Books -->
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>Best Selling Books</h2>
+                    <p>Pilih buku yang akan ditampilkan di bagian Best Seller pada homepage client.</p>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="books-table">
+                        <thead>
+                            <tr>
+                                <th>Gambar Buku</th>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Best Seller</th>
+                                <th>Urutan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dummy Data: 5 Buku -->
+                            <tr>
+                                <td><img src="https://www.booktopia.com.au/covers/200/9781760762827/6904/first-knowledges-law.jpg"
+                                        alt="Book Cover" class="book-image"></td>
+                                <td>First Knowledges Law</td>
+                                <td>Fiction</td>
+                                <td><input type="checkbox" checked></td>
+                                <td><input type="number" value="1" min="1" max="10"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="https://www.booktopia.com.au/covers/200/9781032396859/2707/inclusive-education-for-the-21st-century.jpg"
+                                        alt="Book Cover" class="book-image"></td>
+                                <td>Inclusive Education for the 21st Century</td>
+                                <td>Fiction</td>
+                                <td><input type="checkbox"></td>
+                                <td><input type="number" value="2" min="1" max="10"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="https://www.booktopia.com.au/covers/200/9781647289126/3306/parallel-computing.jpg"
+                                        alt="Book Cover" class="book-image"></td>
+                                <td>Parallel Computing</td>
+                                <td>Dystopian</td>
+                                <td><input type="checkbox" checked></td>
+                                <td><input type="number" value="3" min="1" max="10"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="https://www.booktopia.com.au/covers/200/9780190333874/7311/teaching-language-in-context.jpg"
+                                        alt="Book Cover" class="book-image"></td>
+                                <td>Teaching Language in Context</td>
+                                <td>Romance</td>
+                                <td><input type="checkbox"></td>
+                                <td><input type="number" value="4" min="1" max="10"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="https://www.booktopia.com.au/covers/200/9780761196884/3412/everything-you-need-to-ace-maths-in-one-big-fat-notebook-uk-edition-.jpg"
+                                        alt="Book Cover" class="book-image"></td>
+                                <td>Everything You Need to Ace Maths in One Big Fat Notebook (UK Edition)</td>
+                                <td>Fiction</td>
+                                <td><input type="checkbox" checked></td>
+                                <td><input type="number" value="5" min="1" max="10"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bagian Banner Promo -->
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>Banner Promo</h2>
+                    <p>Unggah dan atur banner promo untuk homepage client.</p>
+                </div>
+                <form class="banner-form">
+                    <div class="form-group">
+                        <label for="banner-file">Upload Banner (Gambar)</label>
+                        <input type="file" id="banner-file" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="banner-title">Judul Banner</label>
+                        <input type="text" id="banner-title" placeholder="Masukkan judul banner"
+                            value="Promo Bulan Ini: Diskon 20%">
+                    </div>
+                    <div class="form-group">
+                        <label for="banner-desc">Deskripsi Singkat Banner</label>
+                        <textarea id="banner-desc" rows="3"
+                            placeholder="Masukkan deskripsi singkat">Dapatkan buku favorit Anda dengan harga spesial!</textarea>
+                    </div>
+                    <!-- Preview Banner (Dummy Image) -->
+                    <div class="preview-section">
+                        <h3>Preview Banner Saat Ini</h3>
+                        <img src="https://via.placeholder.com/800x300?text=Promo+Banner" alt="Banner Preview"
+                            class="banner-preview">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tombol Simpan Perubahan -->
+            <div class="save-section">
+                <button class="save-btn">Simpan Perubahan</button>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const logoutBtn = document.querySelector(".logout-btn");
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", () => {
+                    // Hapus semua data login dari localStorage
+                    localStorage.removeItem("loggedInUser");
+                    localStorage.removeItem("isAdmin");
+
+                    // Notifikasi
+                    alert("Anda telah logout.");
+
+                    // Arahkan kembali ke halaman login
+                   window.location.href = "/proyek1/login.html";
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

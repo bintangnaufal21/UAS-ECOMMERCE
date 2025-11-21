@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Book Sales System</title>
+    <!-- Pastikan path ini sesuai lokasi file CSS kamu -->
+    <link rel="stylesheet" href="/admin1/css/head.css">
+    <link rel="stylesheet" href="/admin1/css/dash.css">
+
+</head>
+
+<body>
+    <!-- Sidebar (selalu visible, tanpa toggle) -->
+    <aside id="sidebar">
+        <div class="header">
+            <h1>Admin Panel</h1>
+        </div>
+        <nav>
+            <a href="/admin1/html/login2.html">
+                <span>📊</span>
+                Dashboard
+            </a>
+            <a href="/admin1/html/bookm.html" class="active">
+                <span>📚</span>
+                Books
+            </a>
+            <a href="/admin1/html/orders.html">
+                <span>📦</span>
+                Orders
+            </a>
+            <a href="/admin1/html/homepage.html">
+                <span>🏠</span>
+                Homepage
+            </a>
+            <a href="/admin1/html/users.html">
+                <span>👥</span>
+                Users
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Overlay for mobile sidebar (static without JS) -->
+    <div id="sidebar-overlay"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar-content">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    <span>Welcome, Admin User</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Summary Cards -->
+            <div class="summary-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon blue">📚</div>
+                        <div>
+                            <h3>Total Books</h3>
+                            <p>1,250</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon green">📦</div>
+                        <div>
+                            <h3>Total Orders</h3>
+                            <p>456</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon purple">👥</div>
+                        <div>
+                            <h3>Total Customers</h3>
+                            <p>890</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales Statistics -->
+            <div class="stats-grid">
+                <div class="card stats-card">
+                    <h2>Sales Statistics (Monthly)</h2>
+                    <div class="bar-chart-container">
+                        <div class="bar-wrapper">
+                            <div class="bar" style="height: 40px;"></div>
+                            <div class="bar-value">150</div>
+                            <div class="bar-label">Jan</div>
+                        </div>
+                        <div class="bar-wrapper">
+                            <div class="bar" style="height: 80px;"></div>
+                            <div class="bar-value">300</div>
+                            <div class="bar-label">Feb</div>
+                        </div>
+                        <div class="bar-wrapper">
+                            <div class="bar" style="height: 120px;"></div>
+                            <div class="bar-value">450</div>
+                            <div class="bar-label">Mar</div>
+                        </div>
+                        <div class="bar-wrapper">
+                            <div class="bar" style="height: 100px;"></div>
+                            <div class="bar-value">380</div>
+                            <div class="bar-label">Apr</div>
+                        </div>
+                    </div>
+                    <p class="chart-note">Static bar chart.</p>
+                </div>
+                <div class="card stats-card">
+                    <h2>Quick Insights</h2>
+                    <ul>
+                        <li>• Sales up 15% from last month</li>
+                        <li>• Top category: Fiction (45% of sales)</li>
+                        <li>• Average order value: $25.50</li>
+                        <li>• Pending orders: 23</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Recent Orders Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>Recent Orders</h2>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Pesanan</th>
+                                <th>Nama Pemesan</th>
+                                <th>Tanggal</th>
+                                <th>Total Harga</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1001</td>
+                                <td>John Doe</td>
+                                <td>2023-10-01</td>
+                                <td>$45.99</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#1002</td>
+                                <td>Jane Smith</td>
+                                <td>2023-10-02</td>
+                                <td>$32.50</td>
+                                <td><span class="status-badge status-shipped">Dikirim</span></td>
+                            </tr>
+                            <tr>
+                                <td>#1003</td>
+                                <td>Bob Johnson</td>
+                                <td>2023-10-03</td>
+                                <td>$67.20</td>
+                                <td><span class="status-badge status-completed">Selesai</span></td>
+                            </tr>
+                            <tr>
+                                <td>#1004</td>
+                                <td>Alice Brown</td>
+                                <td>2023-10-04</td>
+                                <td>$19.99</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const logoutBtn = document.querySelector(".logout-btn");
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", () => {
+                    // Hapus semua data login dari localStorage
+                    localStorage.removeItem("loggedInUser");
+                    localStorage.removeItem("isAdmin");
+
+                    // Notifikasi
+                    alert("Anda telah logout.");
+
+                    // Arahkan kembali ke halaman login
+                    window.location.href = "/proyek1/login.html";
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

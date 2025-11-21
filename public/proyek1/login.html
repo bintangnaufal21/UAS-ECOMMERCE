@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Bookstore</title>
+  <link rel="stylesheet" href="/proyek1/css/style.css">
+</head>
+<body>
+  <section class="auth-section">
+    <div class="auth-container">
+      <h2>Login</h2>
+      <form onsubmit="login(event)">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Masukkan username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Masukkan password" required>
+        </div>
+
+        <button type="submit" class="auth-btn">Login</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Belum punya akun? <a href="register.html">Daftar sekarang</a></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function login(event) {
+      event.preventDefault(); // biar form gak reload halaman
+      
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!username || !password) {
+        alert("Isi username dan password dulu ya!");
+        return;
+      }
+
+      // ====== CEK LOGIN ADMIN ======
+      const adminUser = "admin@bookstore.com"; // ubah sesuai kebutuhan
+      const adminPass = "admin123"; // ubah sesuai kebutuhan
+
+      if (username === adminUser && password === adminPass) {
+        localStorage.setItem("loggedInUser", "Admin");
+        alert("Login sebagai Admin berhasil!");
+        window.location.href = "/admin1/html/login2.html"; // arahkan ke halaman admin
+      } 
+      // ====== LOGIN USER BIASA ======
+      else {
+        localStorage.setItem("loggedInUser", username);
+        alert("Login berhasil! Selamat datang, " + username + "!");
+        window.location.href = "home.html";
+      }
+    }
+  </script>
+</body>
+</html>

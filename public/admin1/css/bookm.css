@@ -1,0 +1,590 @@
+/* ========================================
+   SIDEBAR STYLES (dari head.css, tanpa toggle/hamburger/overlay)
+   ======================================== */
+aside {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  overflow-y: auto;
+  /* HAPUS: Tidak ada transform translateX atau transition untuk toggle */
+}
+
+aside .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  background-color: #268f55; /* Accent color konsisten */
+  color: white;
+  padding: 0 1rem;
+}
+
+aside .header h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Navigasi di Sidebar */
+aside nav {
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+aside nav a {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #374151; /* Abu-abu gelap */
+  background-color: #f9fafb; /* Light background */
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease; /* Smooth untuk background, color, transform hover */
+}
+
+aside nav a:hover,
+aside nav a:focus,
+aside nav a.active { /* Highlight halaman aktif */
+  background-color: #268f55; /* Accent hover/active */
+  color: rgb(255, 255, 255);
+  transform: translateX(4px); /* Geser sedikit ke kanan */
+  outline: 2px solid #268f55; /* Focus ring untuk accessibility */
+  cursor: pointer;
+}
+
+aside nav span {
+  margin-right: 0.75rem;
+  font-size: 1.25rem; /* Icon size (emoji) */
+}
+
+/* HAPUS: Semua style #sidebar-overlay, .open, dan toggle-related */
+
+/* ========================================
+   MAIN CONTAINER & NAVBAR STYLES (tanpa hamburger/flex)
+   ======================================== */
+.main-container {
+  margin-left: 250px; /* Offset untuk sidebar fixed, selalu visible di semua layar */
+  min-height: 100vh;
+  background-color: #f9fafb; /* Light background untuk admin */
+  position: relative; /* Biar z-index relatif */
+  /* HAPUS: Tidak ada transition margin-left untuk toggle */
+}
+
+.main-container .navbar {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+/* Tulisan judul navbar */
+.navbar-content h1 {
+  color: #268f55; /* Accent color */
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* HAPUS: Semua style .flex dan .hamburger (tidak diperlukan) */
+
+/* User Info di Navbar */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info span {
+  color: #806b7f; /* Tulisan welcome user */
+  font-size: 0.875rem;
+}
+
+.logout-btn {
+  background-color: #ef4444; /* Merah untuk logout */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover,
+.logout-btn:focus {
+  background-color: #dc2626; /* Merah lebih gelap */
+  outline: 2px solid #ef4444;
+}
+
+/* HAPUS: Semua body.sidebar-open dan overlay styles */
+
+/* ========================================
+   BOOK MANAGEMENT CONTENT STYLES (dari bookm.css asli)
+   ======================================== */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6;
+    color: #374151;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, label {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+}
+
+/* Main Content */
+.main-content {
+    padding: 1.5rem;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.header-section h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Add Button (sekarang button untuk JS, style sama seperti label asli) */
+.add-btn {
+    padding: 0.5rem 1rem;
+    background-color: #4f46e5;
+    color: white;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.add-btn:hover {
+    background-color: #4338ca;
+}
+
+/* Table (PERBAIKAN: Batasan lebar kolom untuk rapi, judul buku space lebih besar) */
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* PERBAIKAN: Enforce fixed layout untuk batasan width kolom */
+}
+
+thead {
+    background-color: #f9fafb;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top; /* Align top untuk konsistensi */
+}
+
+/* PERBAIKAN: Batasan width per kolom menggunakan :nth-child */
+th:nth-child(1), td:nth-child(1) { /* Gambar */
+    width: 100px;
+    min-width: 100px;
+}
+
+th:nth-child(2), td:nth-child(2) { /* Judul Buku - space lebih besar untuk text panjang */
+    width: 35%;
+    min-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Tidak wrap, potong dengan ... jika panjang */
+}
+
+th:nth-child(3), td:nth-child(3) { /* Kategori */
+    width: 15%;
+    min-width: 120px;
+}
+
+th:nth-child(4), td:nth-child(4) { /* Harga - right align */
+    width: 12%;
+    min-width: 100px;
+    text-align: right;
+}
+
+th:nth-child(5), td:nth-child(5) { /* Stok - right align */
+    width: 8%;
+    min-width: 60px;
+    text-align: right;
+}
+
+th:nth-child(6), td:nth-child(6) { /* Aksi */
+    width: 15%;
+    min-width: 120px;
+}
+
+th {
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+}
+
+tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+img {
+    height: 80px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block; /* Pastikan img tidak punya margin ekstra */
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    margin-right: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s;
+    white-space: nowrap; /* Buttons tidak wrap di kolom aksi */
+}
+
+.edit-btn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2563eb;
+}
+
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.5rem 0.75rem;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+/* Modal (dari CSS-only ke JS-controlled: default hidden, active via class) */
+.modal {
+    display: none; /* Default hidden */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.active { /* Tambahan untuk JS toggle */
+    display: block;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-height: 85vh; /* Batasi tinggi max viewport */
+    overflow-y: auto; /* Scroll vertikal jika form/deskripsi panjang */
+}
+
+.close-modal {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    color: #aaa;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.close-modal:hover {
+    color: #000;
+}
+
+.modal h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #111827;
+}
+
+.modal-note {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background-color: #f9fafb;
+    border-radius: 4px;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #374151;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-note {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.cancel-btn {
+    background-color: #d1d5db;
+    color: #374151;
+}
+
+.cancel-btn:hover {
+    background-color: #9ca3af;
+}
+
+.submit-btn {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #4338ca;
+}
+
+/* PERBAIKAN FORM: Layout horizontal lebar ke samping (kurangi tinggi form) */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 kolom di desktop/tablet */
+    gap: 1rem; /* Jarak antar kolom/baris */
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1; /* Span full width untuk deskripsi/image */
+}
+
+/* --- Action buttons di tabel --- */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Base style untuk tombol Edit & Hapus */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border-radius: 999px; /* pill */
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease,
+                box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.08);
+}
+
+/* Tombol Edit – warna ungu/primary */
+.btn-edit {
+    background-color: #6366F1;
+    color: #ffffff;
+}
+
+.btn-edit:hover {
+    background-color: #4F46E5;
+    transform: translateY(-1px);
+}
+
+/* Tombol Hapus – warna merah lembut */
+.btn-delete {
+    background-color: #F3F4F6;
+    color: #DC2626;
+}
+
+.btn-delete:hover {
+    background-color: #FEE2E2;
+    color: #B91C1C;
+    transform: translateY(-1px);
+}
+
+/* Biar tombol tidak mepet di HP */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (untuk konten Books saja, tanpa sidebar toggle)
+   ======================================== */
+/* Di mobile: Sidebar tetap visible, content sempit (margin-left 250px), navbar sederhana */
+@media (max-width: 768px) {
+  .main-content {
+      padding: 1rem;
+  }
+
+  .header-section {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+  }
+
+  .table-container {
+      overflow-x: auto;
+  }
+
+  table {
+      min-width: 600px;
+  }
+
+  /* PERBAIKAN RESPONSIVE TABEL: Kurangi min-width judul di mobile agar tidak terlalu sempit */
+  th:nth-child(2), td:nth-child(2) { /* Judul Buku */
+      min-width: 200px; /* Lebih kecil di mobile, tapi tetap ellipsis */
+  }
+
+  th, td {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.875rem;
+  }
+
+  .action-btn {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.75rem;
+      margin-right: 0.25rem;
+  }
+
+  .navbar-content {
+      padding: 0 1rem;
+  }
+
+  .navbar-content h1 {
+      font-size: 1.25rem;
+  }
+
+  .user-info {
+      gap: 0.5rem; /* Kurangi gap di mobile */
+  }
+
+  .user-info span {
+      font-size: 0.75rem; /* Ukuran lebih kecil di mobile */
+  }
+
+  /* PERBAIKAN MODAL: Kurangi margin-top agar tidak potong di atas, tambah scroll vertikal jika form panjang */
+  .modal-content {
+      margin: 5% auto; /* Kurangi dari 10% agar modal lebih rendah dan full visible */
+      width: 95%;
+      padding: 1.5rem;
+      max-height: 80vh; /* Batasi tinggi max agar tidak exceed viewport */
+      overflow-y: auto; /* Scroll vertikal jika form terlalu panjang */
+  }
+
+  /* PERBAIKAN FORM GRID: 1 kolom vertikal di mobile (tapi tetap pendek karena layout horizontal di desktop) */
+  .form-grid {
+      grid-template-columns: 1fr; /* 1 kolom vertikal di mobile */
+      gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Checkout - Bookstore</title> 
+    <link rel="stylesheet" href="css/header.css"> 
+    <link rel="stylesheet" href="css/co.css"> 
+    <link rel="stylesheet" href="css/style1.css"> 
+</head>
+<body>
+    <div class="top-banner">
+        <p>Free Shipping on all orders over $49. T&Cs apply. Ends Monday 13th October 2025.</p>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>booktopia</h1>
+                <span>Australia's home of books</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Title" />
+                <button>Search</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="categories.html">CATEGORIES</a></li>
+            <li><a href="orhis.html">ORDER HISTORY</a></li>
+            <li><a href="cart.html">CART</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+        </ul>
+    </nav>
+
+    <div class="checkout-container">
+        <header class="checkout-header">
+            <h1>Checkout</h1>
+            <p>Review your order and complete your purchase</p>
+        </header>
+
+        <main class="checkout-main">
+
+            <!-- Form Section -->
+            <section class="form-section">
+                <div class="form-card">
+                    <h2>Shipping Information</h2>
+                    <form id="shipping-form">
+                        <div class="input-group">
+                            <label for="full-name">Full Name *</label>
+                            <input type="text" id="full-name" name="full-name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="address">Full Address *</label>
+                            <textarea id="address" name="address" rows="3" required></textarea>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="postal-code">Postal Code *</label>
+                                <input type="text" id="postal-code" name="postal-code" required>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Shipping Method -->
+                <div class="form-card">
+                    <h2>Shipping Method</h2>
+                    <div class="shipping-options">
+                        <label class="shipping-option">
+                            <input type="radio" name="shipping" value="jne" checked data-cost="5" data-estimate="3-5 days">
+                            <span class="option-label">JNE</span>
+                            <span class="option-details">Standard Delivery - $5.00 (3-5 days)</span>
+                        </label>
+                        <label class="shipping-option">
+                            <input type="radio" name="shipping" value="sicepat" data-cost="7" data-estimate="2-4 days">
+                            <span class="option-label">SiCepat</span>
+                            <span class="option-details">Express Delivery - $7.00 (2-4 days)</span>
+                        </label>
+                        <label class="shipping-option">
+                            <input type="radio" name="shipping" value="jt" data-cost="6" data-estimate="2-3 days">
+                            <span class="option-label">J&T</span>
+                            <span class="option-details">Fast Delivery - $6.00 (2-3 days)</span>
+                        </label>
+                        <label class="shipping-option">
+                            <input type="radio" name="shipping" value="pos" data-cost="4" data-estimate="5-7 days">
+                            <span class="option-label">Pos Indonesia</span>
+                            <span class="option-details">Economy Delivery - $4.00 (5-7 days)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="form-card">
+                    <h2>Payment Method</h2>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="bank" checked>
+                            <span class="option-icon">🏦</span>
+                            <span class="option-label">Bank Transfer</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="wallet">
+                            <span class="option-icon">💳</span>
+                            <span class="option-label">E-Wallet (GoPay, OVO, etc.)</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card">
+                            <span class="option-icon">💳</span>
+                            <span class="option-label">Credit Card (Visa/Mastercard)</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="cod">
+                            <span class="option-icon">💰</span>
+                            <span class="option-label">Cash on Delivery (COD)</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Summary -->
+            <aside class="summary-section">
+                <div class="summary-card">
+                    <h2>Order Summary</h2>
+                    <div class="order-items" id="order-items">
+                        <!-- Item checkout otomatis muncul di sini -->
+                    </div>
+
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Shipping:</span>
+                            <span id="shipping-cost">$5.00</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Grand Total:</span>
+                            <span id="grand-total">$5.00</span>
+                        </div>
+                    </div>
+
+                    <button class="place-order-btn">Place Order</button>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+<script>
+    // Cek login
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if(!loggedInUser){
+        alert("Harap login dulu untuk checkout!");
+        window.location.href = "login.html";
+    }
+
+    // Ambil data cart
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const orderContainer = document.getElementById('order-items');
+
+    let subtotal = 0;
+
+    if(cart.length === 0){
+        orderContainer.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+        cart.forEach(item => {
+            const div = document.createElement('div');
+            div.classList.add('order-item');
+            const quantity = item.quantity || 1;
+            const total = (item.price * quantity).toFixed(2);
+            subtotal += parseFloat(total);
+            div.innerHTML = `
+                <div class="item-info">
+                    <h3>${item.title}</h3>
+                    <p>$${item.price.toFixed(2)} x ${quantity}</p>
+                </div>
+                <span class="item-total">$${total}</span>
+            `;
+            orderContainer.appendChild(div);
+        });
+    }
+
+    document.getElementById('subtotal').innerText = `$${subtotal.toFixed(2)}`;
+    const shippingCost = 5.00;
+    document.getElementById('shipping-cost').innerText = `$${shippingCost.toFixed(2)}`;
+    document.getElementById('grand-total').innerText = `$${(subtotal + shippingCost).toFixed(2)}`;
+</script>
+
+</body>
+</html>

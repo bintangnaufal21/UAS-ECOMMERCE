@@ -1,0 +1,428 @@
+/* Reset minimal dan base styles (lokal untuk order-history-container saja) */
+.order-history-container * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.order-history-container {
+    font-family: 'Arial', sans-serif; 
+}
+
+.content-wrapper {
+    margin-top: 0px; /* Spacing setelah navbar, sama seperti co.html */
+    background-color: #f8f8f8; /* Abu muda netral lembut */
+    min-height: calc(100vh - 200px); /* Pastikan full height jika konten sedikit */
+}
+
+
+.order-history-container {
+    max-width: 1200px; 
+    margin: 0 auto; /* Space kosong kanan-kiri sama (centered) */
+    padding: 20px; /* Padding sama dengan co.html */
+    background-color: #f8f8f8; /* Abu muda netral, sama dengan co.html */
+}
+
+/* Order History Header (kotak judul, sama seperti .checkout-header di co.html) */
+.oh-header {
+    text-align: center; /* Sama centered */
+    margin-bottom: 5px; /* Margin bottom lebih kecil */
+    background-color: #fff; /* Putih bersih, sama */
+    padding: 20px; /* Padding sama dengan co.html */
+    border-radius: 10px; /* Radius sama */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow sama */
+}
+
+.oh-header h1 {
+    font-size: 28px; 
+    color: #333; 
+    margin-bottom: 2px; 
+}
+
+.oh-header p {
+    color: #666; /* Abu sedang, sama */
+    font-size: 16px; /* Ukuran sama dengan p di co.html */
+    margin: 0; /* Sama */
+}
+
+/* Order History Main (seperti checkout-main: flex column untuk konten utama) */
+.order-history-main {
+    display: flex;
+    gap: 30px; 
+    flex-wrap: wrap; 
+}
+
+/* Order List Section (seperti form-section: grid untuk daftar card, isi tidak diubah) */
+.order-list-section {
+    flex: 2; /* Ambil space utama seperti form-section di co.html */
+    min-width: 300px;
+    display: grid;
+    gap: 20px; /* Jarak antar card, tidak diubah */
+}
+
+/* Order Card */
+.order-card {
+    background-color: #fff; /* Putih bersih */
+    border-radius: 10px; /* Radius sama seperti form-card di co.html */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow sama seperti form-card */
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth hover, tidak diubah */
+    margin-bottom: 20px; /* Margin bottom mirip form-card di co.html */
+}
+
+.order-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12); /* Shadow lebih dalam saat hover, tidak diubah */
+    transform: translateY(-2px); /* Efek lift ringan, tidak diubah */
+}
+
+/* Order Header (Flexbox untuk info dan status, isi tidak diubah) */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px; /* Padding mirip form-card */
+    background-color: #f8f9fa; /* Abu sangat muda untuk header card */
+    border-bottom: 1px solid #e9ecef; /* Garis pemisah tipis */
+}
+
+.order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.order-id {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333; /* Abu gelap */
+}
+
+.order-date {
+    font-size: 0.95rem;
+    color: #666; /* Abu sedang */
+}
+
+/* Status Badge (Warna berbeda sesuai permintaan, isi tidak diubah) */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease;
+}
+
+.status-badge:hover {
+    transform: scale(1.05); /* Efek zoom ringan saat hover */
+}
+
+.status-badge.pending {
+    background-color: #fff3e0; /* Oranye lembut */
+    color: #ff9800;
+}
+
+.status-badge.processing {
+    background-color: #e3f2fd; /* Biru lembut */
+    color: #2196f3;
+}
+
+.status-badge.shipped {
+    background-color: #f3e5f5; /* Ungu lembut */
+    color: #9c27b0;
+}
+
+.status-badge.delivered {
+    background-color: #e8f5e8; /* Hijau lembut */
+    color: #4caf50;
+}
+
+.status-badge.canceled {
+    background-color: #ffebee; /* Merah lembut */
+    color: #f44336;
+}
+
+/* Order Items (List buku, dengan scroll jika terlalu panjang, isi tidak diubah) */
+.order-items {
+    padding: 15px 25px 10px; /* Padding lebih kecil dari header */
+    max-height: 120px; /* Batasi tinggi agar card tidak terlalu panjang */
+    overflow-y: auto; /* Scroll vertikal jika banyak item */
+    background-color: #fafafa; /* Latar abu sangat muda untuk daftar */
+}
+
+.item-row {
+    padding: 8px 0; /* Padding vertikal untuk setiap item */
+    border-bottom: 1px solid #e9ecef; /* Garis pemisah antar item */
+    font-size: 0.95rem;
+    color: #555; /* Abu sedang untuk teks item */
+}
+
+.item-row:last-child {
+    border-bottom: none; /* Hilangkan garis di item terakhir */
+}
+
+.item-row span {
+    display: block; /* Pastikan teks full width */
+}
+
+/* Order Footer (Flexbox untuk total dan tombol, isi tidak diubah) */
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #fff; /* Putih bersih */
+    border-top: 1px solid #e9ecef; /* Garis pemisah atas */
+}
+
+.total-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333; /* Abu gelap */
+}
+
+.view-details-btn {
+    background-color: #4CAF50; /* Hijau seperti place-order-btn di co.html */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px; /* Radius sama seperti tombol di co.html */
+    cursor: pointer;
+    font-size: 16px; /* Ukuran sama seperti tombol di co.html */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+    background-color: #45a049; /* Hover lebih gelap, sama seperti co.html */
+}
+
+.view-details-btn:disabled {
+    background-color: #ccc; /* Abu untuk disabled (misal canceled) */
+    cursor: not-allowed;
+}
+
+/* Empty State (Centered, jika tidak ada pesanan, isi tidak diubah) */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #fff;
+    border-radius: 10px; /* Radius sama seperti form-card di co.html */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow sama */
+    margin: 40px auto;
+    max-width: 500px;
+}
+
+.empty-state h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.shop-now-btn {
+    display: inline-block;
+    background-color: #4CAF50; /* Hijau sama seperti tombol di co.html */
+    color: white;
+    text-decoration: none;
+    padding: 15px; /* Padding mirip tombol di co.html */
+    border-radius: 5px;
+    font-size: 16px; /* Ukuran sama */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.shop-now-btn:hover {
+    background-color: #45a049; /* Hover sama */
+}
+
+/* Scrollbar Custom untuk order-items (opsional, modern look, isi tidak diubah) */
+.order-items::-webkit-scrollbar {
+    width: 6px;
+}
+
+.order-items::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.order-items::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.order-items::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (Mobile-First, disesuaikan mirip co.html)
+   ======================================== */
+
+/* Tablet/Mobile (max-width: 768px) - Mirip responsif co.html */
+@media (max-width: 780px) {
+    .content-wrapper {
+        padding: 10px; /* Padding halaman lebih kecil, sama seperti co.html */
+    }
+
+    .order-history-container {
+        padding: 10px; /* Padding container lebih kecil, sama */
+        margin: 0; /* Hilangkan margin auto di mobile kecil */
+    }
+
+    .oh-header {
+        padding: 20px; /* Padding header sama seperti co.html di mobile */
+        margin-bottom: 20px; /* Kurangi margin bottom */
+    }
+
+    .oh-header h1 {
+        font-size: 24px; /* Ukuran h1 sama seperti co.html di mobile */
+    }
+
+    .oh-header p {
+        font-size: 16px; /* Ukuran p sama */
+    }
+
+    .order-history-main {
+        gap: 20px; /* Gap lebih kecil, mirip co.html */
+        flex-direction: column; /* Stack jika perlu, mirip checkout-main */
+    }
+
+    .order-list-section {
+        min-width: auto; /* Hilangkan min-width di mobile, sama seperti co.html */
+        gap: 15px; /* Jarak card lebih kecil */
+    }
+
+    .order-card {
+        margin-bottom: 15px; /* Margin bottom lebih kecil, mirip form-card */
+    }
+
+    .order-header {
+        flex-direction: column; /* Stack vertikal: info di atas, status di bawah */
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 20px; /* Padding lebih kecil, mirip co.html */
+    }
+
+    .status-badge {
+        align-self: flex-end; /* Status di kanan bawah di mobile */
+        font-size: 0.8rem; /* Ukuran lebih kecil */
+        padding: 5px 10px;
+    }
+
+    .order-items {
+        padding: 10px 20px 5px; /* Padding lebih kecil */
+        max-height: 100px; /* Lebih pendek di mobile */
+    }
+
+    .item-row {
+        font-size: 0.9rem; /* Teks lebih kecil */
+        padding: 6px 0;
+    }
+
+    .order-footer {
+        flex-direction: column; /* Stack: total di atas, tombol di bawah */
+        gap: 10px;
+        padding: 15px 20px; /* Padding lebih kecil */
+        text-align: center;
+    }
+
+    .total-price {
+        font-size: 1.1rem;
+    }
+
+    .view-details-btn {
+        width: 100%; /* Full width tombol di mobile, mirip place-order-btn */
+        padding: 12px; /* Padding mirip tombol co.html */
+        font-size: 14px; /* Ukuran lebih kecil di mobile */
+    }
+
+    .empty-state {
+        padding: 40px 15px; /* Padding lebih kecil */
+        margin: 20px auto;
+    }
+
+    .empty-state h2 {
+        font-size: 1.5rem; /* Ukuran lebih kecil */
+    }
+
+    .shop-now-btn {
+        width: 100%; /* Full width di mobile, mirip tombol co.html */
+        text-align: center;
+        padding: 12px; /* Padding mirip */
+        font-size: 14px;
+    }
+}
+
+/* Mobile Kecil (max-width: 480px) - Mirip co.html */
+@media (max-width: 480px) {
+    .oh-header h1 {
+        font-size: 20px; /* Lebih kecil lagi */
+    }
+
+    .oh-header p {
+        font-size: 14px;
+    }
+
+    .order-history-main {
+        padding: 15px; /* Padding main lebih kecil */
+    }
+
+    .order-header,
+    .order-items,
+    .order-footer {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .order-id {
+        font-size: 1.1rem;
+    }
+
+    .order-date {
+        font-size: 0.85rem;
+    }
+
+    .item-row {
+        font-size: 0.85rem;
+    }
+
+    .total-price {
+        font-size: 1rem;
+    }
+
+    .view-details-btn {
+        padding: 10px; /* Padding lebih kecil */
+        font-size: 14px;
+    }
+
+    .shop-now-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .empty-state {
+        padding: 30px 10px;
+        margin: 15px auto;
+    }
+
+    .empty-state h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Desktop Large (min-width: 1200px) - Opsional, untuk fine-tune seperti co.html */
+@media (min-width: 1200px) {
+    .order-history-main {
+        padding: 30px 40px; /* Padding lebih besar di desktop */
+    }
+
+    .oh-header {
+        padding: 21px 40px;
+    }
+}

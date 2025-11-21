@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Saya - Bookstore</title>
+  <link rel="stylesheet" href="/proyek1/css/profile.css">
+</head>
+<body>
+
+  <div class="profile-container" id="profileContainer">
+    <h2>Profil Saya</h2>
+    <div class="profile-info" id="profileInfo">
+      <!-- Info user ditampilkan lewat JavaScript -->
+    </div>
+    <div class="profile-actions">
+      <button onclick="goHome()">🏠 Kembali ke Home</button>
+      <button onclick="logout()">🚪 Logout</button>
+    </div>
+  </div>
+
+  <script>
+    // Ambil data user dari localStorage
+    const loggedInUser = localStorage.getItem("loggedInUser");
+
+    // Kalau belum login, arahkan ke halaman login
+    if (!loggedInUser) {
+      alert("Kamu harus login dulu!");
+      window.location.href = "login.html";
+    } else {
+      // Tampilkan data user
+      const profileInfo = document.getElementById("profileInfo");
+
+      // Kalau nanti kamu pakai register.html yang simpan data lebih lengkap (email, password, dsb),
+      // tinggal ambil dari localStorage misalnya "userEmail" juga
+      profileInfo.innerHTML = `
+        <p><strong>Nama Pengguna:</strong> ${loggedInUser}</p>
+        <p><strong>Email:</strong> ${loggedInUser.includes("@") ? loggedInUser : loggedInUser + "@bookstore.com"}</p>
+      `;
+    }
+
+    function goHome() {
+      window.location.href = "home.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      alert("Kamu sudah logout!");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

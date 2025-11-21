@@ -1,0 +1,395 @@
+/* Reset dan base styles (lokal untuk cart-container saja) */
+.cart-container * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-container {
+    font-family: 'Arial', sans-serif; /* Sama seperti co.html */
+}
+
+/* Content Wrapper (konsistensi dengan halaman lain) */
+.content-wrapper {
+    margin-top: 0px; /* Spacing setelah navbar*/
+    background-color: #f8f8f8; 
+    min-height: calc(100vh - 200px); /* Pastikan full height jika konten sedikit */
+}
+
+/* Cart Container (wrapper utama, sama seperti .checkout-container di co.html) */
+.cart-container {
+    max-width: 1200px; /* Sama lebar dengan co.html */
+    margin: 0 auto; /* Space kosong kanan-kiri sama (centered) */
+    padding: 20px; /* Padding sama dengan co.html */
+    background-color: #f8f8f8; /* Abu muda netral, sama dengan co.html */
+}
+
+/* Cart Header (kotak judul, sama seperti .checkout-header di co.html) */
+.cart-header {
+    text-align: left; /* Sama centered seperti co.html */
+    margin-bottom: 30px; /* Margin bottom sama */
+    background-color: #fff; /* Putih bersih, sama */
+    padding: 20px; /* Padding sama dengan co.html */
+    border-radius: 10px; /* Radius sama */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow sama */
+    display: flex; /* Tetap flex untuk back-link */
+    justify-content: space-between; /* Space between h1 dan back-link */
+    align-items: center; /* Align center vertikal */
+}
+
+.cart-header h1 {
+    font-size: 28px; /* Ukuran sama dengan h1 di co.html */
+    color: #333; /* Abu gelap netral, sama */
+    margin-bottom: 2px; /* Margin bottom sama (jika wrap) */
+    margin: 15px; /* Hilangkan margin default */
+    flex: 1; /* Ambil space utama */
+}
+
+.back-link {
+    text-decoration: none;
+    color: #4CAF50; /* Warna hijau, tidak diubah */
+    font-weight: bold;
+    transition: color 0.3s ease;
+    white-space: nowrap; /* Pastikan tidak wrap */
+}
+
+.back-link:hover {
+    color: #45a049; /* Hover tidak diubah */
+}
+
+/* Cart Main (seperti checkout-main: flex untuk items dan summary) */
+.cart-main {
+    display: flex; 
+    gap: 30px; 
+    flex-wrap: wrap; 
+}
+
+/* Cart Items Section (seperti form-section: flex 2 untuk list item, isi tidak diubah) */
+.cart-items-section {
+    flex: 2; /* Ambil space utama seperti form-section di co.html */
+    min-width: 300px;
+}
+
+/* Cart Summary Section */
+.cart-summary-section {
+    flex: 1; /* Space samping seperti summary-section di co.html */
+    min-width: 300px; 
+    text-align: center;
+}
+
+/* Cart Items List (isi tidak diubah: flex 2, min-width 300px) */
+.cart-items {
+    flex: 2;
+    min-width: 300px; /* Minimal width untuk mobile, tidak diubah */
+}
+
+/* Cart Item (isi tidak diubah: background, padding, flex, gap, dll.) */
+.cart-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space lebih besar antar gambar dan details */
+}
+
+.book-image {
+    width: 120px; /* Diperbesar dari 100px */
+    height: 180px; /* Diperbesar dari 150px, proporsional */
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.book-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.book-detail {
+    color: #666;
+    font-size: 13px; /* Dikurangi sedikit dari 14px untuk kompak, beri ruang lebih untuk gambar */
+}
+
+.price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.unit-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #f9f9f9;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.qty-btn:hover {
+    background-color: #ccc;
+}
+
+.qty-input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+}
+
+.subtotal {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.remove-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Cart Summary (isi tidak diubah: flex 1, padding, radius, shadow, dll.) */
+.cart-summary {
+    flex: 1;
+    background-color: #fff;
+    padding: 40px; /* Padding lebih besar untuk summary */
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 380px;
+    max-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #eee;
+}
+
+.summary-row.total {
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 18px;
+    color: #4CAF50;
+    margin-top: 10px;
+}
+
+.checkout-btn {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #45a049;
+}
+
+/* Tambahan minimal untuk empty cart message (dari JS) - tidak ubah elemen lain */
+.cart-items p {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 18px;
+    color: #666;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (Mobile-First, disesuaikan mirip co.html)
+   ======================================== */
+
+/* Tablet/Mobile (max-width: 768px) - Mirip responsif co.html */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 0; /* Hilangkan padding wrapper di mobile, sama seperti co.html implisit */
+    }
+
+    .cart-container {
+        padding: 10px; /* Padding container lebih kecil, sama seperti co.html di mobile */
+        margin: 0; /* Hilangkan margin auto di mobile kecil */
+    }
+
+    .cart-main {
+        flex-direction: column; /* Stack column seperti checkout-main di mobile */
+        gap: 20px; /* Gap lebih kecil, mirip co.html */
+    }
+
+    .cart-items-section {
+        min-width: auto; /* Hilangkan min-width di mobile, sama seperti co.html */
+        order: 2; /* Items di bawah summary di mobile */
+    }
+
+    .cart-summary-section {
+        order: -1; /* Summary di atas di mobile untuk UX, sama seperti co.html */
+        min-width: auto;
+    }
+
+    .cart-header {
+        padding: 15px; /* Padding header lebih kecil, mirip co.html di mobile */
+        flex-direction: column; /* Stack h1 dan back-link di mobile */
+        gap: 10px;
+        text-align: center; /* Centered seperti co.html */
+    }
+
+    .cart-header h1 {
+        font-size: 24px; /* Ukuran h1 lebih kecil di mobile, mirip co.html */
+        margin: 0;
+    }
+
+    .back-link {
+        font-size: 16px; /* Ukuran back-link menyesuaikan */
+    }
+
+    .cart-item {
+        flex-direction: column; /* Stack vertikal di mobile, tidak diubah */
+        text-align: center;
+        gap: 20px; /* Space tetap lebih besar di mobile juga */
+    }
+
+    .price-section {
+        flex-direction: column; /* Stack di mobile, tidak diubah */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quantity-controls {
+        gap: 10px; /* Gap lebih besar di mobile, tidak diubah */
+    }
+
+    .qty-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 20px; /* Ukuran lebih besar di mobile, tidak diubah */
+    }
+
+    .book-image {
+        width: 100px; /* Dikembalikan ke ukuran asli di mobile agar tidak terlalu besar */
+        height: 150px;
+    }
+
+    .cart-summary {
+        padding: 25px; /* Padding summary lebih kecil di mobile, mirip form-card co.html */
+        max-width: none; /* Hilangkan max-width di mobile */
+        max-height: none;
+        margin-bottom: 20px; /* Margin bottom mirip co.html */
+    }
+
+    .checkout-btn {
+        padding: 12px; /* Padding tombol lebih kecil di mobile, mirip co.html */
+        font-size: 14px;
+    }
+}
+
+/* Mobile Kecil (max-width: 480px) - Mirip co.html */
+@media (max-width: 480px) {
+    .cart-header h1 {
+        font-size: 20px; /* Lebih kecil lagi, mirip co.html */
+    }
+
+    .cart-container {
+        padding: 5px; /* Padding sangat kecil di mobile kecil */
+    }
+
+    .cart-main {
+        gap: 15px; /* Gap lebih kecil */
+    }
+
+    .cart-item {
+        padding: 15px; /* Padding item lebih kecil */
+        margin-bottom: 10px;
+    }
+
+    .book-title {
+        font-size: 16px; /* Teks lebih kecil, tidak diubah */
+    }
+
+    .book-detail {
+        font-size: 12px;
+    }
+
+    .unit-price,
+    .subtotal {
+        font-size: 14px;
+    }
+
+    .cart-summary {
+        padding: 20px; /* Padding summary lebih kompak */
+    }
+
+    .summary-row {
+        font-size: 14px; /* Ukuran row lebih kecil */
+    }
+
+    .summary-row.total {
+        font-size: 16px;
+    }
+
+    .checkout-btn {
+        padding: 10px; /* Padding tombol sangat kecil */
+        font-size: 14px;
+    }
+
+    .cart-items p {
+        padding: 30px 15px; /* Empty message lebih kompak */
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booktopia - Engineering & Physics</title>
+  <link rel="stylesheet" href="/proyek1/css/header.css">
+  <link rel="stylesheet" href="/proyek1/css/style.css">
+  <style>
+    /* Ikon keranjang di pojok kanan bawah gambar */
+    .book-item {
+      position: relative;
+    }
+    .add-cart {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: #4caf50;
+;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .add-cart:hover {
+     background-color: #c84b6f;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-banner">
+    <p>Free Shipping on all orders over $49. T&Cs apply. Ends Monday 13th October 2025.</p>
+  </div>
+
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo">
+        <h1>booktopia</h1>
+        <span>Australia’s home of books</span>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search Title" />
+        <button>Search</button>
+      </div> 
+    </div>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="/proyek1/home.html">HOME</a></li>
+      <li><a href="/proyek1/categories.html" class="active">CATEGORIES</a></li>
+      <li><a href="/proyek1/orhis.html">ORDER HISTORY</a></li>
+      <li><a href="/proyek1/cart.html">CART</a></li>
+      <li><a href="/proyek1/about.html">ABOUT US</a></li>
+    </ul>
+  </nav>
+
+  <section class="category-detail">
+    <h2>Engineering & Physics Books</h2>
+    <p class="category-desc">
+      Dive into the fascinating world of engineering and physics with these top titles — 
+      perfect for students and professionals seeking strong theoretical and practical knowledge.
+    </p>
+
+    <div class="book-grid">
+      <div class="book-item">
+        <img src="/proyek1/images/Marc Cubillas.jpeg" alt="Introduction to Mechanical Engineering">
+        <h3>Introduction to Mechanical Engineering</h3>
+        <p class="author">By: R.S. Khurmi</p>
+        <p class="price">$34.99</p>
+        <button class="add-cart" onclick="addToCart('Introduction to Mechanical Engineering', 34.99)">🛒</button>
+      </div>
+
+      <div class="book-item">
+        <img src="/proyek1/images/Marc Cubillas.jpeg" alt="Fundamentals of Physics">
+        <h3>Fundamentals of Physics</h3>
+        <p class="author">By: Halliday & Resnick</p>
+        <p class="price">$39.95</p>
+        <button class="add-cart" onclick="addToCart('Fundamentals of Physics', 39.95)">🛒</button>
+      </div>
+
+      <div class="book-item">
+        <img src="/proyek1/images/Marc Cubillas.jpeg" alt="Electrical Circuits">
+        <h3>Electrical Circuits</h3>
+        <p class="author">By: Charles Alexander</p>
+        <p class="price">$29.50</p>
+        <button class="add-cart" onclick="addToCart('Electrical Circuits', 29.50)">🛒</button>
+      </div>
+    </div>
+  </section>
+
+<script>
+  function addToCart(title, price) {
+    const loggedIn = localStorage.getItem("loggedInUser"); // cek apakah user sudah login
+
+    if (!loggedIn) { // kalau belum login
+      alert("Kamu harus login dulu sebelum menambah ke keranjang!");
+      window.location.href = "/proyek1/login.html"; // redirect ke login
+      return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const exist = cart.find(item => item.title === title);
+    if (exist) {
+      alert(title + " sudah ada di keranjang!");
+      return;
+    }
+
+    cart.push({ title, price, quantity: 1 }); // tambah quantity supaya lebih lengkap
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(title + " berhasil ditambahkan ke keranjang!");
+  }
+</script>
+</body>
+</html>

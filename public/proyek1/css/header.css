@@ -1,0 +1,263 @@
+/* ========== GLOBAL RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ========== TOP BANNER ========== */
+.top-banner {
+  background-color: #0b6623;
+  color: white;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 8px;
+}
+
+.top-banner p {
+  max-width: 1200px;
+  margin: 0 auto; /* Centered teks panjang */
+}
+
+/* ========== HEADER ========== */
+.main-header { /* Ubah selector ke .main-header untuk spesifik, hindari konflik dengan .cart-header */
+  background-color: #fff8f2;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Logo kiri, search tengah */
+  padding: 15px 20px;
+  gap: 20px;
+  position: relative;
+}
+
+/* Biar search bar selalu di tengah layar */
+.search-bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 45px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+
+.logo h1 {
+  font-size: 1.8rem;
+  color: #268f55;
+  text-transform: lowercase; /* Pastikan lowercase seperti "booktopia" */
+  margin: 0;
+}
+
+.logo span {
+  font-size: 0.8rem;
+  color: #666;
+  display: block;
+  margin-top: -5px; /* Tight spacing untuk subtitle */
+}
+
+/* --- Search Bar --- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 500px; /* Batasi lebar agar tidak terlalu panjang di desktop */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 45px; /* Tinggi konsisten dengan cart search jika ada */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow untuk modern */
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  padding: 0 15px;
+  font-size: 16px;
+  outline: none;
+  background: transparent;
+  color: #333;
+}
+
+.search-bar input::placeholder {
+  color: #999;
+}
+
+.search-bar button {
+  background-color: #ff6b35;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  font-size: 16px;
+  height: 100%;
+  transition: background-color 0.3s ease; /* Smooth hover */
+}
+
+.search-bar button:hover {
+  background-color: #e55a2b; /* Hover lebih gelap untuk konsistensi */
+}
+
+/* --- Header Right --- */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Gap lebih lega */
+}
+
+.header-right a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.header-right a:hover {
+  color: #268f55; /* Hover hijau konsisten dengan navbar */
+}
+
+.regi-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px; /* Padding lebih besar untuk tombol */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease; /* Smooth hover */
+}
+
+.reg-btn:hover {
+  background-color: #0056b3; /* Hover lebih gelap */
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  background-color: #f7f7f7;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.navbar ul {
+  max-width: 1200px; /* Sama dengan header-container untuk alignment */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 30px; /* Gap lebih lega untuk desktop */
+  padding: 0 20px; /* Padding horizontal konsisten */
+}
+
+.navbar li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase; /* Uppercase untuk bold look */
+  letter-spacing: 1px; /* Spacing untuk modern */
+  transition: color 0.3s ease;
+}
+
+.navbar li a:hover {
+  color: #268f55;
+}
+
+/* Responsive untuk Header dan Navbar (minimal, tidak ubah tampilan desktop) */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 15px;
+  }
+
+  .search-bar {
+    max-width: 100%; /* Full-width di mobile */
+    order: 3; /* Pindah search ke bawah di mobile untuk UX */
+  }
+
+  .search-bar input {
+    width: 100%; /* Adaptif di mobile */
+  }
+
+  .navbar ul {
+    flex-wrap: wrap; /* Wrap jika terlalu panjang di mobile */
+    gap: 15px;
+    justify-content: center;
+    padding: 0 10px;
+  }
+
+  .navbar li a {
+    font-size: 0.8rem; /* Sedikit lebih kecil di mobile */
+  }
+
+  .top-banner {
+    font-size: 0.8rem; /* Adjust teks promo di mobile */
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-right {
+    gap: 10px;
+  }
+
+  .reg-btn {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  .navbar ul {
+    gap: 10px;
+  }
+}
+
+.profile-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 50%;          /* bikin bentuknya bulat */
+  width: 40px;                 /* ukuran lebar */
+  height: 40px;                /* ukuran tinggi */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.profile-btn:hover {
+  background-color: #c84b6f;   /* efek hover */
+}
+

@@ -1,0 +1,475 @@
+/* ========================================
+   SIDEBAR STYLES (dari head.css, tanpa toggle/hamburger/overlay)
+   ======================================== */
+aside {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  overflow-y: auto;
+  /* HAPUS: Tidak ada transform translateX atau transition untuk toggle */
+}
+
+aside .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  background-color: #268f55; /* Accent color konsisten */
+  color: white;
+  padding: 0 1rem;
+}
+
+aside .header h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Navigasi di Sidebar */
+aside nav {
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+aside nav a {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #374151; /* Abu-abu gelap */
+  background-color: #f9fafb; /* Light background */
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease; /* Smooth untuk background, color, transform hover */
+}
+
+aside nav a:hover,
+aside nav a:focus,
+aside nav a.active { /* Highlight halaman aktif */
+  background-color: #268f55; /* Accent hover/active */
+  color: rgb(255, 255, 255);
+  transform: translateX(4px); /* Geser sedikit ke kanan */
+  outline: 2px solid #268f55; /* Focus ring untuk accessibility */
+  cursor: pointer;
+}
+
+aside nav span {
+  margin-right: 0.75rem;
+  font-size: 1.25rem; /* Icon size (emoji) */
+}
+
+/* HAPUS: Semua style #sidebar-overlay, .open, dan toggle-related */
+
+/* ========================================
+   MAIN CONTAINER & NAVBAR STYLES (tanpa hamburger/flex)
+   ======================================== */
+.main-container {
+  margin-left: 250px; /* Offset untuk sidebar fixed, selalu visible di semua layar */
+  min-height: 100vh;
+  background-color: #f9fafb; /* Light background untuk admin */
+  position: relative; /* Biar z-index relatif */
+  /* HAPUS: Tidak ada transition margin-left untuk toggle */
+}
+
+.main-container .navbar {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+/* Tulisan judul navbar */
+.navbar-content h1 {
+  color: #268f55; /* Accent color */
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* HAPUS: Semua style .flex dan .hamburger (tidak diperlukan) */
+
+/* User Info di Navbar */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info span {
+  color: #806b7f; /* Tulisan welcome user */
+  font-size: 0.875rem;
+}
+
+.logout-btn {
+  background-color: #ef4444; /* Merah untuk logout */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover,
+.logout-btn:focus {
+  background-color: #dc2626; /* Merah lebih gelap */
+  outline: 2px solid #ef4444;
+}
+
+/* HAPUS: Semua body.sidebar-open dan overlay styles */
+
+/* ========================================
+   USERS MANAGEMENT CONTENT STYLES (dari users.css asli + tambahan interaktivitas)
+   ======================================== */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6; /* Abu muda untuk background */
+    color: #374151; /* Abu gelap untuk teks */
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    background-color: #3b82f6; /* Biru tua untuk tombol */
+    color: white;
+    font-size: 0.875rem;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #1d4ed8; /* Biru lebih gelap saat hover */
+}
+
+input, select {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db; /* Batas abu muda */
+    border-radius: 6px;
+    font-size: 0.875rem;
+    width: 100%;
+}
+
+/* Main Content */
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Tabel Daftar Pelanggan */
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.table-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb; /* Batas abu muda */
+}
+
+.table-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f9fafb; /* Abu sangat muda */
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.875rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+}
+
+tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+}
+
+.status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-shipped {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.status-completed {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-cancelled {
+    background-color: #fee2e2;
+    color: #268f55;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    background-color: #3b82f6;
+}
+
+.action-btn.view {
+    background-color: #10b981; /* Hijau untuk view */
+}
+
+/* Bagian Riwayat Pesanan Pelanggan (tambahan: default hidden, active untuk show via JS) */
+.detail-container {
+    display: none; /* Default hidden untuk interaktivitas */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.detail-container.active { /* Show saat JS tambah class active */
+    display: block;
+}
+
+.detail-header {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+}
+
+.detail-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+/* Tabel Riwayat Pesanan dan Buku */
+.orders-history, .books-list {
+    margin-bottom: 1.5rem;
+}
+
+.orders-history table, .books-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-history th, .orders-history td,
+.books-list th, .books-list td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.orders-history th, .books-list th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* Form Tambah Admin Baru */
+.form-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.form-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.form-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.admin-form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.admin-form button {
+    align-self: flex-start;
+    background-color: #10b981; /* Hijau untuk simpan */
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
+.admin-form button:hover {
+    background-color: #059669;
+}
+
+/* Notification (tambahan untuk JS: muncul saat tambah admin) */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #10b981; /* Green success */
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.notification[style*="opacity: 1"] {
+    opacity: 1;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (untuk konten Users, tanpa sidebar toggle)
+   ======================================== */
+/* Di mobile: Sidebar tetap visible, content sempit (margin-left 250px), navbar sederhana */
+@media (max-width: 1024px) {
+    /* HAPUS: No hide sidebar di tablet */
+    main {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+
+    .navbar-content {
+        padding: 0 1rem;
+    }
+
+    .navbar-content h1 {
+        font-size: 1.25rem;
+    }
+
+    .user-info {
+        gap: 0.5rem; /* Kurangi gap di mobile */
+    }
+
+    .user-info span {
+        font-size: 0.75rem; /* Ukuran lebih kecil di mobile */
+    }
+
+    .detail-container, .admin-form {
+        padding: 1rem;
+    }
+
+    th, td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .notification {
+        right: 10px;
+        left: 10px;
+        top: 10px;
+        text-align: center;
+    }
+
+    /* HAPUS: Semua transform aside, .open class, margin-left toggle main-container */
+}
+
+@media (max-width: 640px) {
+    .orders-history th, .orders-history td,
+    .books-list th, .books-list td {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .admin-form {
+        gap: 0.75rem;
+    }
+
+    input, select {
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .admin-form button {
+        width: 100%;
+        padding: 1rem;
+    }
+}

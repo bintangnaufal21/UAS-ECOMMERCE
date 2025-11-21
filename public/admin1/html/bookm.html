@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management - Admin Panel</title>
+    <link rel="stylesheet" href="/admin1/css/head.css"> <!-- CSS gabungan (head + bookm, tanpa hamburger) -->
+    <link rel="stylesheet" href="/admin1/css/bookm.css"> <!-- CSS khusus book management -->
+</head>
+
+<body>
+    <!-- Sidebar (selalu visible, tanpa toggle) -->
+    <aside id="sidebar">
+        <div class="header">
+            <h1>Admin Panel</h1>
+        </div>
+        <nav>
+            <a href="/admin1/html/login2.html">
+                <span>📊</span>
+                Dashboard
+            </a>
+            <a href="/admin1/html/bookm.html" class="active">
+                <span>📚</span>
+                Books
+            </a>
+            <a href="/admin1/html/orders.html">
+                <span>📦</span>
+                Orders
+            </a>
+            <a href="/admin1/html/homepage.html">
+                <span>🏠</span>
+                Homepage
+            </a>
+            <a href="/admin1/html/users.html">
+                <span>👥</span>
+                Users
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Container (selalu offset sidebar, tanpa overlay) -->
+    <div class="main-container" id="main-container">
+        <!-- Navbar (tanpa hamburger button) -->
+        <header class="navbar">
+            <div class="navbar-content">
+                <h1>Book Management</h1>
+                <div class="user-info">
+                    <span>Welcome, Admin User</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Add New Book Button (Triggers Modal via JS) -->
+            <div class="header-section">
+                <h2>Book List</h2>
+                <button class="add-btn" id="add-book-btn">Tambah Buku Baru</button> <!-- Ubah ke button untuk JS -->
+            </div>
+
+            <!-- Books Table -->
+            <div class="table-container">
+                <table id="books-table">
+                    <thead>
+                        <tr>
+                            <th>Gambar</th>
+                            <th>Judul Buku</th>
+                            <th>Kategori</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="books-tbody">
+                        <!-- Data akan dirender via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Add/Edit Book (sama struktur, dikontrol via JS) -->
+    <div class="modal" id="book-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2 id="modal-title">Tambah Buku Baru</h2>
+            <p class="modal-note" id="modal-note">Isi form di bawah untuk menambah buku baru.</p>
+            <form id="book-form">
+                <input type="hidden" id="edit-id" name="id"> <!-- Untuk edit mode -->
+                <div class="form-group">
+                    <label for="image">Upload Gambar Buku</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <p class="form-note" id="image-preview">Pilih file untuk preview nama.</p>
+                </div>
+                <div class="form-group">
+                    <label for="title">Judul Buku</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Deskripsi Singkat</label>
+                    <textarea id="description" name="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Harga (Rp)</label>
+                    <input type="number" id="price" name="price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stok</label>
+                    <input type="number" id="stock" name="stock" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Kategori</label>
+                    <select id="category" name="category" required>
+                        <option value="">Pilih Kategori</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Science">Science</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn cancel-btn" id="cancel-btn">Batal</button>
+                    <button type="submit" class="btn submit-btn">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const logoutBtn = document.querySelector(".logout-btn");
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", () => {
+                    // Hapus semua data login dari localStorage
+                    localStorage.removeItem("loggedInUser");
+                    localStorage.removeItem("isAdmin");
+
+                    // Notifikasi
+                    alert("Anda telah logout.");
+
+                    // Arahkan kembali ke halaman login
+                   window.location.href = "/proyek1/login.html";
+                });
+            }
+        });
+    </script>
+
+    <!-- JS untuk Interaktivitas (inline, simulasi data, tanpa hamburger toggle) -->
+    <script>
+        // Data buku awal (dari dummy tabel)
+        let books = [
+            { id: 1, image: 'https://www.booktopia.com.au/covers/200/9780367076603/6014/humanising-mental-health-care-in-australia.jpg', title: 'Humanising Mental Health Care in Australia', category: 'Health Care', price: 150000, stock: 50, description: 'A Guide to Trauma-informed Approaches' },
+            { id: 2, image: 'https://www.booktopia.com.au/covers/200/9781740200349/8007/excel-essential-skills-mathematics-extension-revision-and-exam-workbook-year-9.jpg', title: 'Excel Essential Skills : Mathematics Extension Revision and Exam Workbook - Year 9', category: 'Mathematics & Statistics', price: 120000, stock: 30, description: '' },
+            { id: 3, image: 'https://www.booktopia.com.au/covers/200/9781953845238/8004/are-you-ready-for-high-school-math-.jpg', title: 'Are You Ready for High School Math?', category: 'Mathematics & Statistics', price: 200000, stock: 20, description: '' },
+            { id: 4, image: 'https://www.booktopia.com.au/covers/200/9780170442787/1309/computing-technology.jpg', title: 'Computing Technology', category: 'Cumputing & Programming', price: 180000, stock: 40, description: '' }
+        ];
+        let editMode = false;
+        let editingId = null;
+
+        // Render tabel dari array
+        function renderTable() {
+            const tbody = document.getElementById('books-tbody');
+            tbody.innerHTML = '';
+            books.forEach(book => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><img src="${book.image}" alt="${book.title}"></td>
+                    <td>${book.title}</td>
+                    <td>${book.category}</td>
+                    <td>Rp ${book.price.toLocaleString()}</td>
+                    <td>${book.stock}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editBook(${book.id})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="deleteBook(${book.id})">Hapus</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Buka modal untuk add
+        document.getElementById('add-book-btn').addEventListener('click', () => {
+            editMode = false;
+            editingId = null;
+            document.getElementById('modal-title').textContent = 'Tambah Buku Baru';
+            document.getElementById('modal-note').textContent = 'Isi form di bawah untuk menambah buku baru.';
+            document.getElementById('book-form').reset();
+            document.getElementById('image-preview').textContent = 'Pilih file untuk preview nama.';
+            document.getElementById('book-modal').classList.add('active');
+        });
+
+        // Edit buku
+        function editBook(id) {
+            const book = books.find(b => b.id === id);
+            if (book) {
+                editMode = true;
+                editingId = id;
+                document.getElementById('modal-title').textContent = 'Edit Buku';
+                document.getElementById('modal-note').textContent = 'Ubah data buku yang diperlukan.';
+                document.getElementById('title').value = book.title;
+                document.getElementById('description').value = book.description;
+                document.getElementById('price').value = book.price;
+                document.getElementById('stock').value = book.stock;
+                document.getElementById('category').value = book.category;
+                document.getElementById('edit-id').value = id;
+                document.getElementById('image-preview').textContent = `Gambar saat ini: ${book.image.split('?')[0].split('/').pop() || 'Default'}`;
+                document.getElementById('book-modal').classList.add('active');
+            }
+        }
+
+        // Hapus buku
+        function deleteBook(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus buku ini?')) {
+                books = books.filter(b => b.id !== id);
+                renderTable();
+            }
+        }
+
+        // Simpan form (add/edit)
+        document.getElementById('book-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const price = parseFloat(document.getElementById('price').value);
+            const stock = parseInt(document.getElementById('stock').value);
+            const description = document.getElementById('description').value;
+            const imageFile = document.getElementById('image').files[0];
+            let imageUrl = '';
+
+            // Simulasi gambar: Jika file dipilih, tampilkan nama; else gunakan placeholder berdasarkan judul
+            if (imageFile) {
+                imageUrl = `https://via.placeholder.com/80x120?text=${title.slice(0, 10)}`; // Placeholder dinamis
+                document.getElementById('image-preview').textContent = `File dipilih: ${imageFile.name}`;
+            } else if (editMode) {
+                const book = books.find(b => b.id === editingId);
+                imageUrl = book.image;
+            } else {
+                imageUrl = `https://via.placeholder.com/80x120?text=${title.slice(0, 10)}`;
+            }
+
+            const newBook = { id: editMode ? editingId : Date.now(), image: imageUrl, title, category, price, stock, description };
+
+            if (editMode) {
+                const index = books.findIndex(b => b.id === editingId);
+                books[index] = newBook;
+            } else {
+                books.push(newBook);
+            }
+
+            renderTable();
+            closeModal();
+        });
+
+        // Batal / Close modal
+        function closeModal() {
+            document.getElementById('book-modal').classList.remove('active');
+            document.getElementById('book-form').reset();
+        }
+
+        document.getElementById('cancel-btn').addEventListener('click', closeModal);
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+        document.getElementById('modal-overlay').addEventListener('click', closeModal);
+
+        // Logout
+        document.querySelector('.logout-btn').addEventListener('click', () => {
+            if (confirm('Are you sure?')) window.location.href = 'login.html';
+        });
+
+        // Init: Render tabel awal
+        renderTable();
+    </script>
+</body>
+
+</html>

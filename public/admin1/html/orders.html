@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="/admin1/css/head.css"> <!-- CSS gabungan (head + orders, tanpa hamburger) -->
+    <link rel="stylesheet" href="/admin1/css/orders.css"> <!-- CSS khusus order management -->
+</head>
+
+<body>
+    <!-- Sidebar (selalu visible, tanpa toggle) -->
+    <aside id="sidebar">
+        <div class="header">
+            <h1>Admin Panel</h1>
+        </div>
+        <nav>
+            <a href="/admin1/html/login2.html">
+                <span>📊</span>
+                Dashboard
+            </a>
+            <a href="/admin1/html/bookm.html" class="active">
+                <span>📚</span>
+                Books
+            </a>
+            <a href="/admin1/html/orders.html">
+                <span>📦</span>
+                Orders
+            </a>
+            <a href="/admin1/html/homepage.html">
+                <span>🏠</span>
+                Homepage
+            </a>
+            <a href="/admin1/html/users.html">
+                <span>👥</span>
+                Users
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Container (selalu offset sidebar, tanpa overlay) -->
+    <div class="main-container" id="main-container">
+        <!-- Navbar (tanpa hamburger button) -->
+        <header class="navbar">
+            <div class="navbar-content">
+                <h1>Orders Management</h1>
+                <div class="user-info">
+                    <span>Welcome, Admin User</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Orders Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>Daftar Pesanan</h2>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>ID Pesanan</th>
+                                <th>Nama Pemesan</th>
+                                <th>Tanggal Pesanan</th>
+                                <th>Total Harga</th>
+                                <th>Status Pesanan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-tbody">
+                            <!-- Data akan dirender via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Detail Pesanan (awalnya hidden, muncul via JS) -->
+            <div class="detail-container" id="detail-container">
+                <h2 class="detail-header" id="detail-header">Pilih pesanan untuk melihat detail.</h2>
+
+                <div class="detail-grid" id="detail-grid" style="display: none;">
+                    <div class="detail-section">
+                        <h3>Informasi Pemesan</h3>
+                        <p id="customer-name"><strong>Nama:</strong> </p>
+                        <p id="customer-address"><strong>Alamat Lengkap:</strong> </p>
+                        <p id="customer-phone"><strong>Nomor Telepon:</strong> </p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Informasi Tambahan</h3>
+                        <p id="payment-method"><strong>Metode Pembayaran:</strong> </p>
+                        <p id="shipping-method"><strong>Metode Pengiriman:</strong> </p>
+                    </div>
+                </div>
+
+                <div class="detail-section" id="books-section" style="display: none;">
+                    <h3>Daftar Buku yang Dipesan</h3>
+                    <div class="books-list">
+                        <table id="books-detail-table">
+                            <thead>
+                                <tr>
+                                    <th>Judul Buku</th>
+                                    <th>Jumlah</th>
+                                    <th>Harga Satuan</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="books-tbody-detail">
+                                <!-- Dirender via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <p class="total-row" id="total-price" style="text-align: right; font-size: 1.25rem;">Total Harga
+                        Keseluruhan: </p>
+                </div>
+
+                <!-- Status Update (fungsi via JS) -->
+                <div class="status-update" id="status-update-section" style="display: none;">
+                    <label for="status-select">Ubah Status Pesanan:</label>
+                    <select id="status-select">
+                        <option value="pending">Pending</option>
+                        <option value="shipped">Dikirim</option>
+                        <option value="completed">Selesai</option>
+                        <option value="cancelled">Dibatalkan</option>
+                    </select>
+                    <button id="update-status-btn">Ubah Status</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const logoutBtn = document.querySelector(".logout-btn");
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", () => {
+                    // Hapus semua data login dari localStorage
+                    localStorage.removeItem("loggedInUser");
+                    localStorage.removeItem("isAdmin");
+
+                    // Notifikasi
+                    alert("Anda telah logout.");
+
+                    // Arahkan kembali ke halaman login
+                    window.location.href = "/proyek1/login.html";
+                });
+            }
+        });
+    </script>
+
+    <!-- JS untuk Interaktivitas (inline, simulasi data, tanpa hamburger toggle) -->
+    <script>
+        // Data orders dummy (5 orders dengan detail lengkap)
+        let orders = [
+            {
+                id: '#1001', name: 'John Doe', date: '2023-10-01', total: 45.99, status: 'pending',
+                details: {
+                    address: '123 Main St, Cityville, State 12345',
+                    phone: '+1 (555) 123-4567',
+                    payment: 'Kartu Kredit',
+                    shipping: 'Standar (3-5 hari)',
+                    books: [
+                        { title: 'The Great Gatsby', qty: 1, unitPrice: 15.99, subtotal: 15.99 },
+                        { title: 'To Kill a Mockingbird', qty: 2, unitPrice: 12.00, subtotal: 24.00 }
+                    ]
+                }
+            },
+            {
+                id: '#1002', name: 'Jane Smith', date: '2023-10-02', total: 32.50, status: 'shipped',
+                details: {
+                    address: '456 Oak Ave, Townburg, State 67890',
+                    phone: '+1 (555) 987-6543',
+                    payment: 'Transfer Bank',
+                    shipping: 'Ekspres (1-2 hari)',
+                    books: [
+                        { title: 'Sapiens', qty: 1, unitPrice: 32.50, subtotal: 32.50 }
+                    ]
+                }
+            },
+            {
+                id: '#1003', name: 'Bob Johnson', date: '2023-10-03', total: 67.20, status: 'completed',
+                details: {
+                    address: '789 Pine Rd, Villagetown, State 11223',
+                    phone: '+1 (555) 456-7890',
+                    payment: 'Kartu Kredit',
+                    shipping: 'Standar (3-5 hari)',
+                    books: [
+                        { title: 'The Da Vinci Code', qty: 3, unitPrice: 22.40, subtotal: 67.20 }
+                    ]
+                }
+            },
+            {
+                id: '#1004', name: 'Alice Brown', date: '2023-10-04', total: 19.99, status: 'pending',
+                details: {
+                    address: '101 Elm St, Hamletville, State 44556',
+                    phone: '+1 (555) 321-0987',
+                    payment: 'PayPal',
+                    shipping: 'Standar (3-5 hari)',
+                    books: [
+                        { title: '1984', qty: 1, unitPrice: 19.99, subtotal: 19.99 }
+                    ]
+                }
+            },
+            {
+                id: '#1005', name: 'Charlie Wilson', date: '2023-10-05', total: 55.00, status: 'cancelled',
+                details: {
+                    address: '202 Birch Ln, Suburbia, State 77889',
+                    phone: '+1 (555) 654-3210',
+                    payment: 'Transfer Bank',
+                    shipping: 'Ekspres (1-2 hari)',
+                    books: [
+                        { title: 'Pride and Prejudice', qty: 2, unitPrice: 27.50, subtotal: 55.00 }
+                    ]
+                }
+            }
+        ];
+        let selectedOrderId = null;
+
+        // Render tabel daftar pesanan
+        function renderOrdersTable() {
+            const tbody = document.getElementById('orders-tbody');
+            tbody.innerHTML = '';
+            orders.forEach(order => {
+                const statusClass = `status-${order.status}`;
+                const statusText = {
+                    pending: 'Pending',
+                    shipped: 'Dikirim',
+                    completed: 'Selesai',
+                    cancelled: 'Dibatalkan'
+                }[order.status];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>${order.name}</td>
+                    <td>${order.date}</td>
+                    <td>$${order.total.toFixed(2)}</td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn view" onclick="viewOrder('${order.id}')">Lihat Detail</button>
+                            <button class="action-btn" onclick="openStatusUpdate('${order.id}')">Ubah Status</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Lihat detail pesanan
+        function viewOrder(id) {
+            const order = orders.find(o => o.id === id);
+            if (order) {
+                selectedOrderId = id;
+                document.getElementById('detail-header').textContent = `Detail Pesanan ${id}`;
+                document.getElementById('customer-name').innerHTML = `<strong>Nama:</strong> ${order.name}`;
+                document.getElementById('customer-address').innerHTML = `<strong>Alamat Lengkap:</strong> ${order.details.address}`;
+                document.getElementById('customer-phone').innerHTML = `<strong>Nomor Telepon:</strong> ${order.details.phone}`;
+                document.getElementById('payment-method').innerHTML = `<strong>Metode Pembayaran:</strong> ${order.details.payment}`;
+                document.getElementById('shipping-method').innerHTML = `<strong>Metode Pengiriman:</strong> ${order.details.shipping}`;
+                document.getElementById('total-price').innerHTML = `Total Harga Keseluruhan: $${order.total.toFixed(2)}`;
+
+                // Render daftar buku
+                const booksTbody = document.getElementById('books-tbody-detail');
+                booksTbody.innerHTML = '';
+                order.details.books.forEach(book => {
+                    const bookRow = document.createElement('tr');
+                    bookRow.innerHTML = `
+                        <td>${book.title}</td>
+                        <td>${book.qty}</td>
+                        <td>$${book.unitPrice.toFixed(2)}</td>
+                        <td>$${book.subtotal.toFixed(2)}</td>
+                    `;
+                    booksTbody.appendChild(bookRow);
+                });
+
+                // Show sections
+                document.getElementById('detail-container').classList.add('active');
+                document.getElementById('detail-grid').style.display = 'grid';
+                document.getElementById('books-section').style.display = 'block';
+                document.getElementById('status-update-section').style.display = 'block';
+
+                // Set dropdown ke status saat ini
+                document.getElementById('status-select').value = order.status;
+            }
+        }
+
+        // Buka update status (sama dengan view, tapi fokus ke dropdown)
+        function openStatusUpdate(id) {
+            viewOrder(id); // Reuse viewOrder untuk populate
+            document.getElementById('status-select').focus();
+        }
+
+        // Ubah status
+        document.getElementById('update-status-btn').addEventListener('click', () => {
+            if (selectedOrderId) {
+                const newStatus = document.getElementById('status-select').value;
+                const order = orders.find(o => o.id === selectedOrderId);
+                if (order) {
+                    order.status = newStatus;
+                    renderOrdersTable(); // Update tabel utama
+                    // Update badge di detail (opsional, tapi untuk konsistensi)
+                    const statusBadge = document.querySelector('.status-badge'); // Ini di tabel utama, tapi re-render sudah handle
+                    showNotification('✅ Status pesanan berhasil diperbarui.');
+                }
+            }
+        });
+
+        // Show notifikasi
+        function showNotification(message) {
+            let notif = document.getElementById('notification');
+            if (!notif) {
+                notif = document.createElement('div');
+                notif.id = 'notification';
+                notif.className = 'notification';
+                document.body.appendChild(notif);
+            }
+            notif.textContent = message;
+            notif.style.opacity = '1';
+            setTimeout(() => {
+                notif.style.opacity = '0';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        // Hide detail saat klik di luar (opsional, tapi untuk UX)
+        document.getElementById('detail-container').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('detail-container')) {
+                hideDetail();
+            }
+        });
+
+        function hideDetail() {
+            document.getElementById('detail-container').classList.remove('active');
+            document.getElementById('detail-header').textContent = 'Pilih pesanan untuk melihat detail.';
+            document.getElementById('detail-grid').style.display = 'none';
+            document.getElementById('books-section').style.display = 'none';
+            document.getElementById('status-update-section').style.display = 'none';
+            selectedOrderId = null;
+        }
+
+        // Logout
+        document.querySelector('.logout-btn').addEventListener('click', () => {
+            if (confirm('Are you sure?')) window.location.href = 'login.html';
+        });
+
+        // Init: Render tabel awal
+        renderOrdersTable();
+    </script>
+</body>
+
+</html>
