@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\HomepageController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\CategoryController as UserCategoryController;
 use App\Http\Controllers\User\BookController as UserBookController;
@@ -24,9 +25,7 @@ use App\Http\Controllers\User\SearchController;
 // HALAMAN PUBLIC (TANPA LOGIN)
 // ------------------------------------------------------------
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/', [GuestController::class, 'index'])->name('dashboard');
 
 Route::get('/about', function () {
     return view('about');
@@ -133,8 +132,6 @@ Route::middleware(['auth'])
         Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
         Route::get('/search', [SearchController::class, 'index'])->name('search.index');
-
-
 
         Route::get('/about', function () {
             return view('users.about.index');
