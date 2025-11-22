@@ -17,6 +17,7 @@ use App\Http\Controllers\User\BookController as UserBookController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\SearchController;
 
 
 // ------------------------------------------------------------
@@ -130,6 +131,9 @@ Route::middleware(['auth'])
         // PROFIL USER
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+        Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+
 
 
         Route::get('/about', function () {

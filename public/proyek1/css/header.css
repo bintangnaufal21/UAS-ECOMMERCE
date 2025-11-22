@@ -89,6 +89,7 @@ body {
   overflow: hidden;
   height: 45px; /* Tinggi konsisten dengan cart search jika ada */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow untuk modern */
+
 }
 
 .search-bar input {
